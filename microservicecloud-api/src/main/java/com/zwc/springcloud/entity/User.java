@@ -13,6 +13,8 @@ public class User implements Serializable {
 	private String token;    
 	private Date lastLoginTime;
 	private Long deptId;
+	private Dept dept;
+	
 	/**
 	 * @Title:            User
 	 * @param:            
@@ -71,5 +73,21 @@ public class User implements Serializable {
 	 */
 	public void setDeptId(Long deptId) {
 		this.deptId = deptId;
+	}
+
+	/**
+	 * @Title:            getDept <BR>
+	 * @return:           Dept <BR>
+	 */
+	public Dept getDept() {
+		return dept;
+	}
+
+	/**
+	 * @Title:          setDept <BR>
+	 * @return:         Dept <BR>
+	 */
+	public void setDept(Dept dept) {
+		this.dept = dept;
 	}
 }

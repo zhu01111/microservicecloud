@@ -7,17 +7,54 @@
 <script type="text/javascript" src="ueditor/ueditor.config.js"></script>
 <script type="text/javascript" src="ueditor/ueditor.all.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+<style>
+	td{
+		width: 90px;
+		text-align: center;
+	}
+</style>
 </head>
 <body>
 	<div>
     <h1>完整demo</h1>
     <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+    <table id="mytb">
+    	<tr>
+    		<td>ID</td>
+    		<td>姓名</td>
+    		<td>部门</td>
+    		<td>操作</td>
+    	</tr>
+    </table>
+    
+    
 </div>
 
 </body>
 <script type="text/javascript">
-	var editor = UE.getEditor('editor');
-	
+	//var editor = UE.getEditor('editor');
+	$(function(){
+		$.ajax({
+			type:"post",
+			url:"/consumer/user/list",
+			async:true,
+			data:{
+				pageNo:1,
+				pageSize:100
+			},
+			success:function(result){
+				var data = result.data;
+				var innerHtml='';
+				for (var i = 0; i < data.length; i++) {
+					innerHtml += '<tr><td>'+(i+1)+'</td>'+
+								 '<td>'+data[i].username+'</td>'+
+								 '<td>'+data[i].dept.deptName+'</td>'+
+								 '<td>修改&nbsp;删除</td></tr>';
+				}
+				$("#mytb").append(innerHtml);
+			}
+		});
+	});
 
 	
 	$("#h").click(function(){

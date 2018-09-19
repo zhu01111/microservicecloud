@@ -64,23 +64,5 @@ public class FeignClientBack implements ConsumerFeignClient {
 	 * @return
 	 * @see com.zwc.springcloud.feignclient.ConsumerFeignClient#getUser(java.lang.Integer)
 	 */ 
-	@Override
-	public Map<String, Object> getUser(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * <p>Title: login</p>
-	 * @param username
-	 * @param password
-	 * @return
-	 * @see com.zwc.springcloud.feignclient.ConsumerFeignClient#login(java.lang.String, java.lang.String)
-	 */ 
-	@Override
-	public Map<String, Object> login(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

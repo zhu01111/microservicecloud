@@ -51,9 +51,5 @@ public interface ConsumerFeignClient {
 	@RequestMapping(value="/provider/up",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	Map<String, Object> upFile(@RequestPart("file") MultipartFile file,@RequestParam("dname") String dname);
 	
-	@RequestMapping("/provider/user/get/{id}")
-	Map<String, Object> getUser(@PathVariable("id") Integer id);
 	
-	@RequestMapping("/provider/user/login")
-	Map<String, Object> login(@RequestParam("username") String username, @RequestParam("password") String password);
 }

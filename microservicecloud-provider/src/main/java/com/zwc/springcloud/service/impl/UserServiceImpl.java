@@ -25,6 +25,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zwc.springcloud.dao.DeptDao;
 import com.zwc.springcloud.dao.UserDao;
 import com.zwc.springcloud.entity.User;
 import com.zwc.springcloud.service.UserService;
@@ -40,6 +41,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private DeptDao deptDao;
+	
 	Map<String, Object> map = null;
 	/**
 	 * <p>Title: getUser</p>
@@ -52,6 +56,7 @@ public class UserServiceImpl implements UserService {
 		map = new HashMap<>();
 		User user = userDao.get(id);
 		if (user!=null) {
+			user.setDept(deptDao.get(user.getDeptId()));
 			map.put("code", 0);
 			map.put("data", user);
 		}else {
@@ -108,6 +113,11 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		List<User> users = userDao.list((pageNo-1)*pageSize, pageSize);
+		for (User user : users) {
+			if (user!=null) {
+				user.setDept(deptDao.get(user.getDeptId()));				
+			}
+		}
 		map.put("data", users);
 		return map;
 	}
