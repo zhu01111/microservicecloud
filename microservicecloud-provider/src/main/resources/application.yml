@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: microservicecloud-provider
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://39.106.130.199:3306/test?useSSL=true
+    username: root
+    password: 123456
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    prefer-ip-address: true 
+
+file: 
+  path: D://file/
+  #path: /root/file/
+  url: /file/**
+
+domain: http://localhost:8081/file/    

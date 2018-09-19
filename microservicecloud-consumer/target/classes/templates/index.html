@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+	<div>
+    <h1>完整demo</h1>
+    <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+</div>
+
+</body>
+<script type="text/javascript">
+	var editor = UE.getEditor('editor');
+	
+
+	
+	$("#h").click(function(){
+		$.get("/consumer/getId/1",function(data){
+			alert(data.deptName);
+		});
+	});
+</script>
+</html>
