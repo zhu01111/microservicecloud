@@ -91,17 +91,29 @@ application.yml配置
 在工程的配置文件application.yml文件，指定程序名为microservicecloud-consumer，端口号为8080，服务注册地址为http://localhost:7001/eureka/ ，代码如下：
 
 eureka:
+
   client:
+  
     service-url:
+	
       defaultZone: http://localhost:7001/eureka/
+	  
   instance:
+  
     instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+	
     prefer-ip-address: true
+	
 server:
+
   port: 8080
+  
 spring:
+
   application:
+  
     name: microservicecloud-consumer
+	
 定义一个feign接口
 @FeignClient("microservicecloud-provider")
 public interface UserFeignClient {
