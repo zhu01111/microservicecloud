@@ -11,15 +11,23 @@ SpringCloud微服务框架搭建
 4.3配置application.yml
 
 server:
-  port: 7001
+ 
+ port: 7001
 
 eureka:
+
   instance:
-    hostname: localhost
+
+	hostname: localhost
+	
   client:
+  
     fetch-registry: false
+	
     register-with-eureka: false
+	
     service-url:
+	
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 	  
 4.4启动EurekaServer
@@ -43,26 +51,43 @@ public class EurekaApplication {
 4.2 服务提供者
 创建一个服务提供者 (microservicecloud-provider) client,当client向eureka server注册时，它会提供一些元数据，例如主机和端口，URL，主页等。Eureka server 从每个client实例接收心跳消息。 如果心跳超时，则通常将该实例从注册server中删除。
 4.2.3 application.yml配置
+
 server:
+
   port: 8081
 
 spring:
+
   application:
+  
     name: microservicecloud-provider
+	
   datasource:
+  
     type: com.alibaba.druid.pool.DruidDataSource
+	
     driver-class-name: com.mysql.jdbc.Driver
+	
     url: jdbc:mysql://localhost:3306/test?useSSL=true
+	
     username: root
+	
     password: 123456
 
 eureka:
+
   client:
+  
     service-url:
+	
       defaultZone: http://localhost:7001/eureka/
+	  
   instance:
+  
     instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+	
     prefer-ip-address: true
+	
 4.2.4 发布服务
 通过注解@EnableEurekaClient 表明自己是一个eurekaclient.
 @SpringBootApplication
