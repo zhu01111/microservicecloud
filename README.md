@@ -6,7 +6,7 @@ SpringCloud微服务框架搭建
 服务的注册与发现(Eureka )
 在这里，我们需要用的的组件上Spring Cloud Netflix的Eureka ,eureka是一个服务注册和发现模块。
 4.1 服务注册
-4.1.1创建eurekaserver 项目
+4.1.1创建microservicecloud-eureka 项目
 4.1.2引入maven依赖
 4.3配置application.yml
 
@@ -21,6 +21,7 @@ eureka:
     register-with-eureka: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+	  
 4.4启动EurekaServer
 
 /**
@@ -40,7 +41,7 @@ public class EurekaApplication {
 2.eureka.client.fetchRegistry=false #如果为true，启动时报警.
 
 4.2 服务提供者
-创建一个服务提供者 (eureka client),当client向server注册时，它会提供一些元数据，例如主机和端口，URL，主页等。Eureka server 从每个client实例接收心跳消息。 如果心跳超时，则通常将该实例从注册server中删除。
+创建一个服务提供者 (microservicecloud-provider) client,当client向eureka server注册时，它会提供一些元数据，例如主机和端口，URL，主页等。Eureka server 从每个client实例接收心跳消息。 如果心跳超时，则通常将该实例从注册server中删除。
 4.2.3 application.yml配置
 server:
   port: 8081
@@ -85,9 +86,9 @@ Feign 整合了ribbon
  准备工作
 继续用上一节的工程， 启动eureka-server，端口为7001; 启动microservicecloud-provider 两次，端口分别为8081 、8082.
  准备工创建一个feign的服务
-新建一个spring-boot工程，取名为serice-feign，在它的pom文件引入Feign的起步依赖spring-cloud-starter-feign、Eureka的起步依赖
+新建一个spring-boot工程，取名为microservicecloud-consumer，在它的pom文件引入Feign的起步依赖spring-cloud-starter-feign、Eureka的起步依赖
 application.yml配置
-在工程的配置文件application.yml文件，指定程序名为service-feign，端口号为8765，服务注册地址为http://localhost:8761/eureka/ ，代码如下：
+在工程的配置文件application.yml文件，指定程序名为microservicecloud-consumer，端口号为8080，服务注册地址为http://localhost:7001/eureka/ ，代码如下：
 
 eureka:
   client:
