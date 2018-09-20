@@ -38,10 +38,15 @@ eureka:
  * @date:            2018年9月3日        下午3:54:53
  */
 @SpringBootApplication
+
 @EnableEurekaServer
+
 public class EurekaApplication {
+
 	public static void main(String[] args) throws Exception {
+	
 		SpringApplication.run(EurekaApplication.class, args);
+		
 	}
 
 }
@@ -90,11 +95,17 @@ eureka:
 	
 4.2.4 发布服务
 通过注解@EnableEurekaClient 表明自己是一个eurekaclient.
+
 @SpringBootApplication
+
 @EnableEurekaClient
+
 public class ProviderApp {
+
 	public static void main(String[] args) throws Exception {
+	
 		SpringApplication.run(ProviderApp.class, args);
+		
 	}
 
 }
@@ -140,19 +151,32 @@ spring:
     name: microservicecloud-consumer
 	
 定义一个feign接口
+
 @FeignClient("microservicecloud-provider")
+
 public interface UserFeignClient {
+
 	@RequestMapping("/provider/user/get/{id}")
+	
 	Map<String, Object> getUser(@PathVariable("id") Integer id);
+	
 }
 一个/get/{id}的api接口
+
 @RestController
+
 public class UserController {	
+
 	@Autowired
+	
 	private UserFeignClient client;	
+	
 	@RequestMapping("/consumer/user/getId/{id}")
+	
 	public Map<String, Object> getUser(@PathVariable("id") Integer id) {
+	
 		return client.getUser(id);
+		
 	}
 }
 启动方式
@@ -161,12 +185,19 @@ public class UserController {
  * @author:          zhuWeichao
  * @date:            2018年9月3日        下午5:16:37
  */
+ 
 @SpringBootApplication
+
 @EnableEurekaClient
+
 @EnableFeignClients
+
 public class ConsumerApp {
+
 	public static void main(String[] args) throws Exception {
+	
 		SpringApplication.run(ConsumerApp.class, args);
+		
 	}
 }
 启动程序:http://127.0.0.1:8080/consumer/user/getId/1
