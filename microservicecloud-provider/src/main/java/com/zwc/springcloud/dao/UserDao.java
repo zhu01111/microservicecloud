@@ -19,6 +19,7 @@ package com.zwc.springcloud.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
@@ -55,4 +56,7 @@ public interface UserDao {
 	
 	@Select("select count(*) from `user`")
 	int count();
+	
+	@Delete("delete from `user` where id = #{id}")
+	int del(Integer id);
 }

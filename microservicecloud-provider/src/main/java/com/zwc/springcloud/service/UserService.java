@@ -34,4 +34,6 @@ public interface UserService {
 	Map<String, Object> list(Integer pageNo, Integer pageSize);
 	
 	int count();
+	
+	int del(Integer id);
 }

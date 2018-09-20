@@ -20,6 +20,7 @@ package com.zwc.springcloud.service.impl;
 import java.io.File;
 import java.net.InetAddress;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -110,5 +111,15 @@ public class DeptServiceImpl implements DeptService {
 		}
 		map.put("name", dname);
 		return map;
+	}
+
+	/**
+	 * <p>Title: list</p>
+	 * @return
+	 * @see com.zwc.springcloud.service.DeptService#list()
+	 */ 
+	@Override
+	public List<Dept> list() {
+		return deptDao.list();
 	}
 }

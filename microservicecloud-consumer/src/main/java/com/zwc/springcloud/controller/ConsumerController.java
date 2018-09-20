@@ -17,6 +17,7 @@
  */
 package com.zwc.springcloud.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class ConsumerController {
 	@Autowired
 	private ConsumerFeignClient client;
 	
-	@RequestMapping("/consumer/getId/{id}")
+	@RequestMapping("/consumer/dept/getId/{id}")
 	public Dept get(@PathVariable("id") Long id) {
 		return client.get(id);
 	}
@@ -50,5 +51,8 @@ public class ConsumerController {
 	public Map<String, Object> upFile(MultipartFile file, String dname) {
 		return client.upFile(file,dname);
 	}
-	
+	@RequestMapping("/consumer/dept/list")
+	public List<Dept> get() {
+		return client.list();
+	}
 }

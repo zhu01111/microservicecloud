@@ -17,6 +17,7 @@
  */
 package com.zwc.springcloud.feignclient;
 
+import java.util.List;
 import java.util.Map;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.MediaType;
@@ -52,4 +53,7 @@ public interface ConsumerFeignClient {
 	Map<String, Object> upFile(@RequestPart("file") MultipartFile file,@RequestParam("dname") String dname);
 	
 	
+	
+	@RequestMapping("/provider/dept/list")
+	List<Dept> list();
 }

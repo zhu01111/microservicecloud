@@ -17,6 +17,7 @@
  */
 package com.zwc.springcloud.controller;
 
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,5 +47,10 @@ public class DeptController {
 	@RequestMapping("/provider/up")
 	public Map<String, Object> fileUp(MultipartFile file, String dname){
 		return deptService.fileUp(file, dname);
+	}
+	
+	@RequestMapping("/provider/dept/list")
+	public List<Dept> list() {
+		return deptService.list();
 	}
 }

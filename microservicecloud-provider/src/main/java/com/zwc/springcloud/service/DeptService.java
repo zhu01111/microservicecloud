@@ -17,6 +17,7 @@
  */
 package com.zwc.springcloud.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -33,4 +34,6 @@ public interface DeptService {
 	Dept get(Long id);
 	
 	Map<String, Object> fileUp(MultipartFile file, String dname);
+	
+	List<Dept> list();
 }

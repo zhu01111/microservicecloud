@@ -51,4 +51,9 @@ public class UserController {
 	public Map<String, Object> list(Integer pageNo,Integer pageSize) {
 		return client.list(pageNo, pageSize);
 	}
+	
+	@RequestMapping("/consumer/user/del/{id}")
+	public int del(@PathVariable("id") Integer id){
+		return client.del(id);
+	}
 }

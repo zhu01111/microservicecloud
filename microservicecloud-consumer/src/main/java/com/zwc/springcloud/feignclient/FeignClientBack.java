@@ -17,6 +17,7 @@
  */
 package com.zwc.springcloud.feignclient;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -54,6 +55,17 @@ public class FeignClientBack implements ConsumerFeignClient {
 	 */
 	@Override
 	public Map<String, Object> upFile(MultipartFile file, String dname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * <p>Title: list</p>
+	 * @return
+	 * @see com.zwc.springcloud.feignclient.ConsumerFeignClient#list()
+	 */ 
+	@Override
+	public List<Dept> list() {
 		// TODO Auto-generated method stub
 		return null;
 	}

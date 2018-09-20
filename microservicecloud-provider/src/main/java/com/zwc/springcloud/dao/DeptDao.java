@@ -17,8 +17,11 @@
  */
 package com.zwc.springcloud.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
@@ -32,11 +35,15 @@ import com.zwc.springcloud.entity.Dept;
 @Mapper
 public interface DeptDao {
 	
-	@Results(value= {
+	@Results(id="resultMap",value= {
 			@Result(column="dept_name", property="deptName"),
 			@Result(column="db_source", property="dbSource")
 	})	
 	
 	@Select("select * from `dept` where id = #{id}")
 	Dept get(Long id);
+	
+	@ResultMap("resultMap")
+	@Select("select * from `dept`")
+	List<Dept> list();
 }

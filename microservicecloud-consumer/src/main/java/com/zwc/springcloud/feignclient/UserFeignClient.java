@@ -39,4 +39,7 @@ public interface UserFeignClient {
 	
 	@RequestMapping("/provider/user/list")
 	Map<String, Object> list(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+	
+	@RequestMapping("/provider/user/del/{id}")
+	int del(@PathVariable("id") Integer id);
 }

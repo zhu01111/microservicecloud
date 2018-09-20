@@ -132,4 +132,15 @@ public class UserServiceImpl implements UserService {
 		return userDao.count();
 	}
 
+	/**
+	 * <p>Title: del</p>
+	 * @param id
+	 * @return
+	 * @see com.zwc.springcloud.service.UserService#del(java.lang.Integer)
+	 */ 
+	@Override
+	public int del(Integer id) {
+		return userDao.del(id);
+	}
+
 }

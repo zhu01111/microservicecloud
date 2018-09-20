@@ -33,8 +33,9 @@ public class PageController {
 		return "index";
 	}
 	
-	@RequestMapping("/{page}")
+	@RequestMapping("/user/{page}")
 	public String page(@PathVariable("page") String page) {
-		return "pages/"+page;
+		System.err.println(page);
+		return "pages/user/"+page;
 	}
 }
