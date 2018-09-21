@@ -33,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.zwc.springcloud.dao.DeptDao;
 import com.zwc.springcloud.entity.Dept;
 import com.zwc.springcloud.service.DeptService;
+import com.zwc.springcloud.utils.RedisUtil;
 
 /**
  * @ClassName:       DeptServiceImpl
@@ -49,6 +50,7 @@ public class DeptServiceImpl implements DeptService {
 	@Autowired
 	private DeptDao deptDao;
 	
+	RedisUtil redisUtil = new RedisUtil();
 	/**
 	 * <p>Title: get</p>
 	 * @param id
@@ -120,6 +122,13 @@ public class DeptServiceImpl implements DeptService {
 	 */ 
 	@Override
 	public List<Dept> list() {
-		return deptDao.list();
+		List<Dept> depts = null;
+		if (!redisUtil.exists("depts")) {
+			depts = deptDao.list();
+			redisUtil.set("depts", depts);
+		}else {
+			depts = (List<Dept>) redisUtil.get("depts");
+		}
+		return depts;
 	}
 }

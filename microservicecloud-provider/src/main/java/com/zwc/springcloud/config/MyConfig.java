@@ -39,4 +39,6 @@ public class MyConfig extends WebMvcConfigurerAdapter {
 		  registry.addResourceHandler(url).addResourceLocations("file:"+path);
 		  super.addResourceHandlers(registry);
 	  }
+	 
+	 
 }

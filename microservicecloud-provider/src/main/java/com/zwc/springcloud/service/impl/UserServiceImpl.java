@@ -27,8 +27,10 @@ import org.springframework.stereotype.Service;
 
 import com.zwc.springcloud.dao.DeptDao;
 import com.zwc.springcloud.dao.UserDao;
+import com.zwc.springcloud.entity.Dept;
 import com.zwc.springcloud.entity.User;
 import com.zwc.springcloud.service.UserService;
+import com.zwc.springcloud.utils.RedisUtil;
 
 /**
  * @ClassName:       UserServiceImpl
@@ -45,6 +47,8 @@ public class UserServiceImpl implements UserService {
 	private DeptDao deptDao;
 	
 	Map<String, Object> map = null;
+	
+	RedisUtil redisUtil = new RedisUtil();
 	/**
 	 * <p>Title: getUser</p>
 	 * @param id
@@ -54,9 +58,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Map<String, Object> getUser(Integer id) {
 		map = new HashMap<>();
-		User user = userDao.get(id);
+		User user=null;
+		if (!redisUtil.exists("user"+id)) {
+			user = userDao.get(id);
+			if (user!=null) {
+				user.setDept(deptDao.get(user.getDeptId()));
+			}
+			redisUtil.set("user"+id, user);
+		}else {
+			user = (User) redisUtil.get("user"+id);
+		}
 		if (user!=null) {
-			user.setDept(deptDao.get(user.getDeptId()));
 			map.put("code", 0);
 			map.put("data", user);
 		}else {
@@ -112,11 +124,17 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		
-		List<User> users = userDao.list((pageNo-1)*pageSize, pageSize);
-		for (User user : users) {
-			if (user!=null) {
-				user.setDept(deptDao.get(user.getDeptId()));				
+		List<User> users = null;
+		if (!redisUtil.exists("users")) {
+			users = userDao.list((pageNo-1)*pageSize, pageSize);
+			for (User user : users) {
+				if (user!=null) {
+					user.setDept(deptDao.get(user.getDeptId()));				
+				}
 			}
+			redisUtil.set("users", users);
+		}else {
+			users = (List<User>) redisUtil.get("users");
 		}
 		map.put("data", users);
 		return map;
@@ -140,7 +158,12 @@ public class UserServiceImpl implements UserService {
 	 */ 
 	@Override
 	public int del(Integer id) {
-		return userDao.del(id);
+		int num = userDao.del(id);
+		if (num>0) {
+			redisUtil.remove("user"+id);
+			redisUtil.remove("users");
+		}
+		return num;
 	}
-
+	
 }
